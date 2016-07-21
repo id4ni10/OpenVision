@@ -48,8 +48,8 @@ Temporary Items
 
 *.dll
 *.pdb
-/obj/Debug
+/OpenVision/obj/Debug
 /.vs
 /packages
-/bin
-/obj/Debug
+/OpenVision/bin
+/OpenVision/obj/Debug
