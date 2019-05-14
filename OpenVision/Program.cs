@@ -10,7 +10,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -93,13 +92,13 @@ namespace OpenVision
             return ms;
         }
 
-        private static Point[] ToPointsArray(List<IntPoint> points)
+        private static System.Drawing.Point[] ToPointsArray(List<IntPoint> points)
         {
-            Point[] array = new Point[points.Count];
+            System.Drawing.Point[] array = new System.Drawing.Point[points.Count];
 
             for (int i = 0, n = points.Count; i < n; i++)
             {
-                array[i] = new Point(points[i].X, points[i].Y);
+                array[i] = new System.Drawing.Point(points[i].X, points[i].Y);
             }
 
             return array;
