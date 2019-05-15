@@ -31,9 +31,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\opencv-2.4.3\opencv\build\x86\vc11\bin\opencv_contrib2413.dll" />
-    <None Include="..\..\..\..\opencv-2.4.3\opencv\build\x86\vc11\bin\opencv_core2413.dll" />
-    <None Include="..\..\..\..\opencv-2.4.3\opencv\build\x86\vc11\bin\opencv_highgui2413.dll" />
-    <None Include="..\..\..\..\opencv-2.4.3\opencv\build\x86\vc11\bin\opencv_imgproc2413.dll" />
+    <None Include="..\..\..\..\..\..\opencv\build\x64\vc15\bin\opencv_world410.dll">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+	<None Include="..\..\..\..\..\..\opencv\build\x64\vc15\bin\opencv_world410d.dll">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
+	<None Include="..\..\..\..\..\..\opencv\build\x64\vc15\bin\opencv_ffmpeg410_64.dll">
+      <Filter>Arquivos de Recurso</Filter>
+    </None>
   </ItemGroup>
 </Project>
