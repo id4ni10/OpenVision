@@ -3,6 +3,7 @@ using AForge.Imaging;
 using AForge.Imaging.Filters;
 using AForge.Math.Geometry;
 using Emgu.CV;
+using Emgu.CV.Structure;
 using Emgu.CV.UI;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace OpenVision
 
             ShowWindow(handle, SW_HIDE);
 
-            var capture = new Capture();
+            var capture = new VideoCapture("rtsp://71014217:123@192.168.0.3:8554/profile0");
 
             var viewer = new ImageViewer();
 
@@ -45,12 +46,12 @@ namespace OpenVision
             {
                 var frame = capture.QueryFrame();
 
-                ProcessImage(frame.Bitmap);
+                //ProcessImage(frame.Bitmap);
 
-                viewer.Image = frame;
+                viewer.Image = Run(frame);
             };
 
-            var btn = new Button();
+            /*var btn = new Button();
 
             btn.Click += async (sender, e) =>
             {
@@ -66,9 +67,30 @@ namespace OpenVision
 
             viewer.Controls.Add(btn);
 
-            viewer.AcceptButton = btn;
+            viewer.AcceptButton = btn;*/
 
             viewer.ShowDialog();
+        }
+
+        static IImage Run(IImage image)
+        {
+            //Read the files as an 8-bit Bgr image  
+            
+            long detectionTime;
+            List<Rectangle> faces = new List<Rectangle>();
+            //List<Rectangle> eyes = new List<Rectangle>();
+
+            DetectFace.Detect(
+              image, "haarcascades/haarcascade_frontalface_default.xml",// "haarcascade_eye.xml",
+              faces,// eyes,
+              out detectionTime);
+
+            foreach (Rectangle face in faces)
+                CvInvoke.Rectangle(image, face, new Bgr(System.Drawing.Color.Red).MCvScalar, 2);
+            //foreach (Rectangle eye in eyes)
+            //CvInvoke.Rectangle(image, eye, new Bgr(System.Drawing.Color.Blue).MCvScalar, 2);
+
+            return image;
         }
 
         public static MemoryStream crop(Bitmap bitmap)
