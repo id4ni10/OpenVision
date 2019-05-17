@@ -1,7 +1,8 @@
 import cv2
 import numpy
- 
-cam = cv2.VideoCapture(0)
+url = "rtsp://71014217:123@10.10.10.209:8554/profile0"
+#camera = cv2.VideoCapture("rtsp://admin:71014217:123@10.10.10.209:8554/xyz/video.smp")
+cam = cv2.VideoCapture(url, cv2.CAP_FFMPEG)
 kernel = numpy.ones((5 ,5), numpy.uint8)
 
 if cam is None or not cam.isOpened():
