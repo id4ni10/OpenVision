@@ -39,7 +39,11 @@ def find_blobs(img):
     im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]),
             (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS,)
     #cv2.drawContours(img, im_with_keypoints, -1, (0, 255, 0), 2)
-    print (keypoints)
+    for k in keypoints:
+        x = int(k.pt[0])
+        y = int(k.pt[1])
+        cv2.putText(im_with_keypoints, str(k.pt), (x, y), cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,0), 2, cv2.LINE_AA)
+
     cv2.imshow("blobs", im_with_keypoints)     
 
 cam = cv2.VideoCapture(0)
