@@ -1,8 +1,8 @@
 import cv2
 import numpy
-#url = "rtsp://71014217:123@10.10.10.209:8554/profile0"
+from PIL import Image
+import pytesseract
 
-#cam = cv2.VideoCapture(url, cv2.CAP_FFMPEG)
 def find_blobs(img):
     # Setup SimpleBlobDetector parameters.
     params = cv2.SimpleBlobDetector_Params()
@@ -39,13 +39,16 @@ def find_blobs(img):
     im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]),
             (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS,)
     #cv2.drawContours(img, im_with_keypoints, -1, (0, 255, 0), 2)
+    print (keypoints)
     for k in keypoints:
         x = int(k.pt[0])
         y = int(k.pt[1])
-        cv2.putText(im_with_keypoints, str(k.pt), (x, y), cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,0), 2, cv2.LINE_AA)
+        pos = str(k.pt)
+        cv2.putText(im_with_keypoints,pos , (x, y), cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,0), 2, cv2.LINE_AA)
 
     cv2.imshow("blobs", im_with_keypoints)     
-
+#url = "rtsp://71014217:123@10.10.10.205:8554/profile0"
+#cam = cv2.VideoCapture(url, cv2.CAP_FFMPEG)
 cam = cv2.VideoCapture(0)
 kernel = numpy.ones((5 ,5), numpy.uint8)
 
@@ -55,8 +58,26 @@ else:
     while (True):
         ret, frame = cam.read()
         cinza = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        text = pytesseract.image_to_string(cinza)
+        print(text)
+        
         find_blobs(frame)
-       # _, imagembin = cv2.threshold(cinza, 90, 255, cv2.THRESH_BINARY)
+    
+        #cv2.imshow('camera', frame)
+        cv2.imshow('cinza', cinza)
+        #cv2.imshow('Binarizada', imagembin)
+        #cv2.imshow('Sem Ruidos + Desfoque', imagemdesfoq)
+    
+        k = cv2.waitKey(1) & 0xFF
+    
+        if k == 27:
+            break
+
+
+
+            #Comentarios
+
+                   # _, imagembin = cv2.threshold(cinza, 90, 255, cv2.THRESH_BINARY)
         #imagemdesfoq = cv2.GaussianBlur(imagembin, (5,5), 0)
         #contornos, hier = cv2.findContours(imagemdesfoq, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
        # cv2.drawContours(frame, contornos, -1, (0, 255, 0), 2)
@@ -76,13 +97,3 @@ else:
 
             #cv2.rectangle(frame, (x, y), (x+w, y + h), (0, 255, 0), 3)
             #cv2.circle(frame, (int(x+w/2), int(y+h/2)), 5, (0, 0, 255), -1)
-    
-        #cv2.imshow('camera', frame)
-        #cv2.imshow('cinza', cinza)
-        #cv2.imshow('Binarizada', imagembin)
-        #cv2.imshow('Sem Ruidos + Desfoque', imagemdesfoq)
-    
-        k = cv2.waitKey(1) & 0xFF
-    
-        if k == 27:
-            break
