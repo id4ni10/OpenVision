@@ -36,8 +36,7 @@ def find_blobs(img):
       
     # Desenhar os keypoints com circulos vermelhos.
     # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS desenha exatamente o tamanho do circulo encontrado
-    im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]),
-            (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS,)
+    im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS,)
     #cv2.drawContours(img, im_with_keypoints, -1, (0, 255, 0), 2)
     print (keypoints)
     for k in keypoints:
@@ -47,6 +46,7 @@ def find_blobs(img):
         cv2.putText(im_with_keypoints,pos , (x, y), cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,0), 2, cv2.LINE_AA)
 
     cv2.imshow("blobs", im_with_keypoints)     
+
 #url = "rtsp://71014217:123@10.10.10.205:8554/profile0"
 #cam = cv2.VideoCapture(url, cv2.CAP_FFMPEG)
 cam = cv2.VideoCapture(0)
@@ -75,22 +75,22 @@ else:
 
 
 
-            #Comentarios
+        #Comentarios
 
-                   # _, imagembin = cv2.threshold(cinza, 90, 255, cv2.THRESH_BINARY)
+        #_, imagembin = cv2.threshold(cinza, 90, 255, cv2.THRESH_BINARY)
         #imagemdesfoq = cv2.GaussianBlur(imagembin, (5,5), 0)
         #contornos, hier = cv2.findContours(imagemdesfoq, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-       # cv2.drawContours(frame, contornos, -1, (0, 255, 0), 2)
+        #cv2.drawContours(frame, contornos, -1, (0, 255, 0), 2)
         #circles = cv2.HoughCircles(imagemdesfoq, cv2.HOUGH_GRADIENT, 1.2, 100)
         #for c in contornos:
-         #   contornofechado = cv2.arcLength(c, True)
-          #  aproximarforma = cv2.approxPolyDP(c, 0.03 * contornofechado, True)
-          #  cv2.imshow('contornos', frame)
+            #contornofechado = cv2.arcLength(c, True)
+            #aproximarforma = cv2.approxPolyDP(c, 0.03 * contornofechado, True)
+            #cv2.imshow('contornos', frame)
 
             #rangomax = numpy.array([255, 50, 50]) # B, G, R
             #rangomin = numpy.array([51, 0, 0])
-           # mask = cv2.inRange(frame, rangomin, rangomax)
-        # reduce the noise
+            #mask = cv2.inRange(frame, rangomin, rangomax)
+            # reduce the noise
             #opening = cv2.morphologyEx(mask, cv2.MORPH_BLACKHAT, kernel)
 
             #x, y, w, h = cv2.boundingRect(opening)
