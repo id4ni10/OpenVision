@@ -31,11 +31,11 @@ def find_blobs(img):
     # Set up the detector with default parameters.
     detector = cv2.SimpleBlobDetector_create(params)
      
-    # Detect blobs.
+    # blobs Detectados.
     keypoints = detector.detect(img)
       
-    # Draw detected blobs as red circles.
-    # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS ensures the size of the circle corresponds to the size of blob
+    # Desenhar os keypoints com circulos vermelhos.
+    # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS desenha exatamente o tamanho do circulo encontrado
     im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]),
             (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS,)
     #cv2.drawContours(img, im_with_keypoints, -1, (0, 255, 0), 2)
