@@ -2,9 +2,9 @@
 Thumbs.db
 ehthumbs.db
 
-OpenVisionCpp/Debug/*
-OpenVisionCpp/X64/*
-
+/OpenVisionCpp/Debug/*
+/OpenVisionCpp/X64/*
+/.vscode
 # Folder config file
 Desktop.ini
 
