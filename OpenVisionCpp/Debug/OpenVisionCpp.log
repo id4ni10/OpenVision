@@ -1,3 +1,0 @@
-﻿  stdafx.cpp
-  OpenVisionCpp.cpp
-opencv_world410.lib(opencv_world410.dll) : fatal error LNK1112: tipo de módulo de máquina 'x64' conflita com tipo de máquina alvo 'x86'
