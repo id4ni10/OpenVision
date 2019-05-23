@@ -1,7 +1,7 @@
 import cv2
 import numpy
 import pytesseract
-from settings import rtsp
+from .settings import rtsp
 
 def find_blobs(img):
     # Setup SimpleBlobDetector parameters.
@@ -45,7 +45,7 @@ def find_blobs(img):
         pos = str(k.pt)
         cv2.putText(im_with_keypoints,pos , (x, y), cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,0), 2, cv2.LINE_AA)
 
-    cv2.imshow("blobs", im_with_keypoints)     
+    cv2.imshow("blobs", im_with_keypoints)
 
 cam = cv2.VideoCapture(rtsp, cv2.CAP_FFMPEG)
 
