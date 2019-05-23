@@ -8,8 +8,8 @@ def find_blobs(img):
     params = cv2.SimpleBlobDetector_Params()
      
     # Change thresholds
-    params.minThreshold = 100;
-    params.maxThreshold = 5000;
+    params.minThreshold = 100
+    params.maxThreshold = 5000
      
     # Filter by Area.
     params.filterByArea = True

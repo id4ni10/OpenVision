@@ -14,7 +14,7 @@ else:
         
         cv2.imshow('gray', gray)
         
-        text = pytesseract.image_to_string(gray)
+        text = pytesseract.image_to_string(gray, lang='por')
 
         print(text)
     
