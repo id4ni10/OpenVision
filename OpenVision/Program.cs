@@ -38,7 +38,7 @@ namespace OpenVision
 
             ShowWindow(handle, SW_HIDE);
 
-            var capture = new VideoCapture("rtsp://71014217:123@192.168.0.3:8554/profile0");
+            var capture = new VideoCapture(0);//("rtsp://71014217:123@192.168.0.3:8554/profile0");
 
             var viewer = new ImageViewer();
 
@@ -81,12 +81,12 @@ namespace OpenVision
             //List<Rectangle> eyes = new List<Rectangle>();
 
             DetectFace.Detect(
-              image, "haarcascades/haarcascade_frontalface_default.xml",// "haarcascade_eye.xml",
+              image, "haarcascades/haarcascade_tank.xml",// "haarcascade_eye.xml",
               faces,// eyes,
               out detectionTime);
 
             foreach (Rectangle face in faces)
-                CvInvoke.Rectangle(image, face, new Bgr(System.Drawing.Color.Red).MCvScalar, 2);
+                CvInvoke.Rectangle(image, face, new Bgr(System.Drawing.Color.Red).MCvScalar);
             //foreach (Rectangle eye in eyes)
             //CvInvoke.Rectangle(image, eye, new Bgr(System.Drawing.Color.Blue).MCvScalar, 2);
 
