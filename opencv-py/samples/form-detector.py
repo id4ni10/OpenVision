@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 import pytesseract
-#from .settings import rtsp
+from settings import rtsp
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(rtsp)
 
 if cam is None or not cam.isOpened():
     print('Warning: unable to open video source: ', cam)
@@ -25,7 +25,10 @@ else:
 
     while (True):
         ret, frame = cam.read()
+        
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        
+        cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
 
         keypoints = detector.detect(gray)
         i = 0

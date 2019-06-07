@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 import pytesseract
-#from .settings import rtsp
+from settings import rtsp
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(rtsp)
 
 if cam is None or not cam.isOpened():
     print('Warning: unable to open video source: ', cam)
