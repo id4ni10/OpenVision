@@ -1,5 +1,5 @@
 import cv2
-from .settings import rtsp
+from settings import rtsp
 
 cam = cv2.VideoCapture(rtsp, cv2.CAP_FFMPEG)
 

@@ -1,5 +1,5 @@
 #rtsp connection
-host = '192.168.0.4'
+host = '192.168.0.2'
 port = 8554
 username = '71014217'
 password = '123'
