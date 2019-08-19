@@ -4,6 +4,7 @@ import numpy as np
 import pytesseract
 import threading
 from settings import rtsp
+from datetime import datetime
 
 plate_cascade = cv2.CascadeClassifier('haarcascade_russian_plate_number.xml')
 
@@ -42,22 +43,19 @@ else:
 
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        faces = plate_cascade.detectMultiScale(gray, 1.3, 5)
-        crop = None
+        faces = plate_cascade.detectMultiScale(gray, 1.2, 5)
+
         for (x, y, w, h) in faces:
             crop = gray[y : y + h, x : x + w]
-            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
             if crop.any():
-                cv2.imshow('ocr', crop)
-
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
                 thresh, bw = cv2.threshold(crop, 225, 255, cv2.THRESH_OTSU | cv2.THRESH_TOZERO)
-                cv2.imshow('bw', bw)
 
                 result, text = read_text(bw)
 
                 if(result):
-                    print(text)
+                    print('{text} - {now}'.format(text = text, now = datetime.today()))
 
         cv2.imshow('frame', frame)
 
