@@ -8,9 +8,9 @@ from datetime import datetime
 
 plate_cascade = cv2.CascadeClassifier('haarcascade_russian_plate_number.xml')
 
-cam = cv2.VideoCapture(rtsp)
-cam.set(3, 91)
-cam.set(4, 64)
+cam = cv2.VideoCapture(0)
+#cam.set(3, 91)
+#cam.set(4, 64)
 
 def fix_cap(capture):
     find = str(capture.group(0))
@@ -47,11 +47,11 @@ else:
 
         for (x, y, w, h) in faces:
             crop = gray[y : y + h, x : x + w]
-
+            cv2.imshow('crop', crop)
             if crop.any():
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
                 thresh, bw = cv2.threshold(crop, 225, 255, cv2.THRESH_OTSU | cv2.THRESH_TOZERO)
-
+                cv2.imshow('bw', bw)
                 result, text = read_text(bw)
 
                 if(result):
