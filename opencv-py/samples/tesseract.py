@@ -23,12 +23,12 @@ else:
         
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-        th3 = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
+        #th3 = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,2)
         #retval, threshold = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
 
-        print(pytesseract.image_to_string(th3, lang='por'))
+        print(pytesseract.image_to_string(gray, lang='por'))
 
-        cv2.imshow('frame', th3)
+        cv2.imshow('frame', gray)
 
         #thread1 = threading.Thread(target=run_ocr, args=(frame,))
 

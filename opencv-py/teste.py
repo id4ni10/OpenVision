@@ -3,25 +3,27 @@ import numpy
 from PIL import Image
 import pytesseract
 
-def find_blobs(img):
+def find_blobs(img, gray):
     # Setup SimpleBlobDetector parameters.
     params = cv2.SimpleBlobDetector_Params()
      
     # Change thresholds
-    params.minThreshold = 100;
-    params.maxThreshold = 5000;
+    params.minThreshold = 40
+    params.maxThreshold = 100
      
     # Filter by Area.
     params.filterByArea = True
-    #params.minArea = 200
-    #params.maxArea = 200
+    params.minArea = 170
+    params.maxArea = 185
      
+    params.blobColor = 0    
+    
     # Filter by Circularity
-    params.filterByCircularity = True
-    #params.minCircularity = 1
+    #params.filterByCircularity = True
+    #params.minCircularity = 0.8
      
     # Filter by Convexity
-    params.filterByConvexity = True
+    params.filterByConvexity = False
     #params.minConvexity = 1
      
     # Filter by Inertia
@@ -38,14 +40,34 @@ def find_blobs(img):
     # cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS desenha exatamente o tamanho do circulo encontrado
     im_with_keypoints = cv2.drawKeypoints(img, keypoints, numpy.array([]), (0,0,255), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS,)
     #cv2.drawContours(img, im_with_keypoints, -1, (0, 255, 0), 2)
-    print (keypoints)
+    #print (keypoints)
+    contours = []
+    crop = gray
+    
     for k in keypoints:
         x = int(k.pt[0])
         y = int(k.pt[1])
         pos = str(k.pt)
-        cv2.putText(im_with_keypoints,pos , (x, y), cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,0), 2, cv2.LINE_AA)
+        cv2.putText(im_with_keypoints, pos , (x, y), cv2.FONT_HERSHEY_SIMPLEX, .5, (0,255,0), 2, cv2.LINE_AA)
+        contours.append(numpy.array([x, y], dtype=numpy.int32))
 
-    cv2.imshow("blobs", im_with_keypoints)     
+    if len(contours) == 4:        
+        # find min and max
+        print(numpy.sort(contours, order= numpy.min(contours)))
+       # print(contours)
+        #crop = im_with_keypoints[y : contours[0], x :  contours[3]]
+        #cv2.imshow("cinza", crop)
+
+    #min = im_with_keypoints[0]
+    #max = im_with_keypoints[3]
+
+    #print(min.pt[0])
+    #print(min.pt[1])
+    #print(contours)
+
+    #cv2.drawContours(im_with_keypoints, contours, -1, (0, 255, 0), 2, 8, hierarchy, 0)
+
+    cv2.imshow("blobs", im_with_keypoints)         
 
 #url = "rtsp://71014217:123@10.10.10.205:8554/profile0"
 #cam = cv2.VideoCapture(url, cv2.CAP_FFMPEG)
@@ -58,13 +80,13 @@ else:
     while (True):
         ret, frame = cam.read()
         cinza = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        text = pytesseract.image_to_string(cinza)
-        print(text)
+        #text = pytesseract.image_to_string(cinza)
+        #print(text)
         
-        find_blobs(frame)
+        find_blobs(frame, cinza)
     
         #cv2.imshow('camera', frame)
-        cv2.imshow('cinza', cinza)
+        #cv2.imshow('cinza', cinza)
         #cv2.imshow('Binarizada', imagembin)
         #cv2.imshow('Sem Ruidos + Desfoque', imagemdesfoq)
     
