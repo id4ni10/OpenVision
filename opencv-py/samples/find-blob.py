@@ -1,7 +1,7 @@
 import cv2
 import numpy
 import pytesseract
-from .settings import rtsp
+from settings import rtsp
 
 def find_blobs(img):
     # Setup SimpleBlobDetector parameters.

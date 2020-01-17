@@ -4,7 +4,7 @@ import pytesseract
 import threading
 from settings import rtsp
 
-cam = cv2.VideoCapture(rtsp)
+cam = cv2.VideoCapture(0)
 
 def run_ocr(frame):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
